@@ -3,9 +3,14 @@ br{
   
 }
 
+
+input{
+    margin: 10px;
+}
+
 #content_container {
     
-    width: 300px;
+    width: 800px;
     margin:0 auto;
     padding: 10px;
     text-align: center;
