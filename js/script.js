@@ -16,14 +16,10 @@ var list_of_colors = ['AliceBlue', 'AntiqueWhite', 'Aqua', 'Aquamarine','Azure',
 var current_element;
 
 
-// function click_enter(){
-//       return document.getElementById('input').addEventListener('keydown', function(){    
-//          if(event.keyCode === 13) {
-//              document.getElementById('button_left').click();       
-//      }
-//      });
-// }
-
+function log(message){
+    console.log(message);
+    confirm(message);
+}
 
 function random_color(){
         return list_of_colors[
@@ -32,110 +28,63 @@ function random_color(){
 
 }
 
-function attach_element(element_name){
+function attach_element(element_name, element_id){
     
     current_element = document.createElement(element_name);
-    document.getElementById('content_container').appendChild(current_element);
+        document.getElementById(element_id).appendChild(current_element);
 }
 
 
-function add_list_element(){
-    current_list_element = document.createElement('li');
-    ordered_list.appendChild(current_list_element);
-}
 
 function update_list_elements(){
-    list_elements = ordered_list.childNodes;
+    list_elements = document.getElementById('ordered_list').children;
 }
 
 
-// function button_code(){
-//         add_list_element();
-//         update_list_elements();
-//         this_list_element = list_elements[(list_elements.length-1)];
-//         this_list_element.textContent = random_color();
-//         // input.textContent = random_color();
-//         this_list_element.style.backgroundColor = this_list_element.textContent;
-//         this_list_element.id = this_list_element.textContent;
+
+
+document.addEventListener('DOMContentLoaded', function(){
         
-//     this_list_element.addEventListener('contextmenu',function(event){
-            
-//             this.remove();
-//             event.preventDefault();
-//             return false;
-//         },false);
-// }
+        
+        attach_element('ol', 'content_container');
+        current_element.id = 'ordered_list';
 
-
-
-    document.addEventListener('DOMContentLoaded', function(){
         
        create_button = document.getElementById('create');
-         
+         create_box = document.getElementById('create_box');
+
          create_button.textContent = 'Click to Add a Color';
-         create_button.addEventListener('click',function(event) {
+         create_button.addEventListener('click',function() {
              
-             attach_element('li');
+               attach_element('li', 'ordered_list');
+               
+               current_element.textContent = String(random_color());
+               current_element.style.backgroundColor = current_element.textContent;
+            
+            update_list_elements();
+               
              
-             current_element.textContent = String(random_color());
-             current_element.style.backgroundColor = current_element.textContent;
-             
-             current_element.addEventListener('click',function(event) {
-                 this.textContent = create_box.value;
-                 this.style.backgroundColor = create_box.value;
-             });
-             
-             
-             ordered_list.appendChild(current_element);
          });
          
         update_button = document.getElementById('update');
+        update_box = document.getElementById('update_box');
          
-        update_button.addEventListener('click', function(){
-            
-            attach_element('li');
+    update_button.addEventListener('click', function(){
+
+            attach_element('li', 'ordered_list');
             
             current_element.textContent = update_box.value;
-            
-            current_element.style.backgroundColor = current_element.textContent;
-            
-            ordered_list.appendChild(current_element);
+            current_element.style.backgroundColor = update_box.value;
+           
+
+           current_element.addEventListener('click', function(){
+                    log(this);
+                
+           });
+
+
         });
         
          
-         attach_element('ol');
-         ordered_list = current_element;
-         ordered_list.id = 'list';
-       
-   
-    
     
 });    
-
-
-// button.addEventListener('click',function(event) {
-             
-//              attach_element('li');
-             
-//              current_element.textContent = String(random_color());
-//              current_element.style.backgroundColor = current_element.textContent;
-             
-//         current_element.addEventListener('click', function(){
-//                if (update_input.value === '' || update_input.value === null ){
-//                   return current_element.textContent = String(random_color());}
-//                          current_element.style.backgroundColor = current_element.textContent;
-                   
-//                 this.textContent = update_input.value;
-//                 this.style.backgroundColor = update_input.value;
-//             });     
-             
-//         current_element.addEventListener('contextmenu', function(el){
-                
-//                     this.remove();
-//                     el.preventDefault();
-//                     return false;
-                
-//                 },false);
-             
-//              ordered_list.appendChild(current_element);
-//          });
